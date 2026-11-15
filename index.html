@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fogón · Apps gratis de verdad</title>
+<meta name="description" content="Apps para Android sin anuncios, sin rastreo y sin suscripciones: El Forzudo, La Alcancía, La Cucha y El Cajón.">
+<meta property="og:title" content="Fogón · Apps gratis de verdad">
+<meta property="og:description" content="Sin anuncios, sin rastreo, sin suscripciones. Tuya desde el primer día.">
+<meta property="og:image" content="https://fogonapps.github.io/recursos/compartir.png">
+<meta name="theme-color" content="#0E0E10">
+<link rel="icon" href="recursos/chispa.svg" type="image/svg+xml">
+<style>
+@font-face { font-family: "Bricolage"; src: url("recursos/bricolage.woff") format("woff"); font-weight: 200 800; font-display: swap; }
+:root {
+  --papel: #0E0E10; --texto: #EDEDEF; --suave: #A9A9B2; --linea: rgba(255,255,255,.10);
+  --vidrio: rgba(255,255,255,.06); --chispa: #E5332A;
+}
+* { box-sizing: border-box; margin: 0; }
+html { background: var(--papel); }
+body {
+  font-family: "Bricolage", system-ui, sans-serif; color: var(--texto); line-height: 1.5;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(255,255,255,.08), transparent 60%),
+    var(--papel);
+  min-height: 100vh; overflow-x: hidden;
+}
+.puntos { position: absolute; inset: 0 0 auto 0; height: 720px; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.16) 1.6px, transparent 1.8px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(55% 50% at 50% 38%, #000 0%, transparent 100%);
+          mask-image: radial-gradient(55% 50% at 50% 38%, #000 0%, transparent 100%);
+}
+main { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 16px 64px; }
+header { text-align: center; padding: 72px 0 40px; }
+header img.logo { width: min(340px, 78vw); height: auto; }
+h1 { font-size: clamp(30px, 6vw, 52px); font-weight: 800; letter-spacing: -.02em; margin-top: 18px; }
+.promesa { color: var(--suave); font-size: clamp(16px, 2.6vw, 20px); margin-top: 8px; }
+.sellos { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 22px; }
+.sello { border: 1px solid var(--linea); background: var(--vidrio); border-radius: 999px; padding: 6px 14px; font-weight: 600; font-size: 15px; }
+h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 800; margin: 56px 0 18px; letter-spacing: -.01em; }
+.apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.app {
+  --t1: #EDEDEF; --fondo: #18181c;
+  background: var(--vidrio); border: 1px solid var(--linea); border-radius: 24px; padding: 20px;
+  display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden;
+}
+.app::before { content: ""; position: absolute; inset: -40% -40% auto auto; width: 220px; height: 220px; border-radius: 50%;
+  background: var(--luz); opacity: .35; filter: blur(60px); pointer-events: none; }
+.app img { width: 96px; height: 96px; position: relative; }
+.app h3 { font-size: 22px; font-weight: 800; position: relative; }
+.app p { color: var(--suave); font-size: 15px; flex: 1; position: relative; }
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px;
+  border-radius: 999px; padding: 0 20px; font: inherit; font-weight: 700; text-decoration: none;
+  background: var(--t1); color: #0E0E10; position: relative; transition: transform .15s;
+}
+.boton:active { transform: scale(.96); }
+.boton.secundario { background: var(--vidrio); color: var(--texto); border: 1px solid var(--linea); }
+.version { font-size: 13px; color: var(--suave); position: relative; min-height: 1.2em; }
+.forzudo   { --t1: #2D5BFF; --luz: #2443B8; } .forzudo .boton { color: #fff; }
+.ahorrador { --t1: #1FB45A; --luz: #137A3C; }
+.cucha     { --t1: #FF7A1A; --luz: #B8501E; }
+.cajon     { --t1: #8A63FF; --luz: #5B3BCC; } .cajon .boton { color: #fff; }
+.pasos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; counter-reset: paso; }
+.paso { background: var(--vidrio); border: 1px solid var(--linea); border-radius: 24px; padding: 20px; }
+.paso::before { counter-increment: paso; content: counter(paso); display: block; font-size: 40px; font-weight: 800; color: var(--chispa); line-height: 1; margin-bottom: 8px; }
+.paso p { color: var(--suave); font-size: 15px; }
+.tarjeta { background: var(--vidrio); border: 1px solid var(--linea); border-radius: 24px; padding: 24px; }
+.tarjeta p + p { margin-top: 10px; }
+.tarjeta p { color: var(--suave); }
+.tarjeta strong { color: var(--texto); }
+a { color: var(--texto); }
+footer { text-align: center; color: var(--suave); font-size: 14px; margin-top: 64px; }
+footer img { width: 22px; vertical-align: middle; }
+@media (prefers-reduced-motion: reduce) { .boton { transition: none; } }
+</style>
+</head>
+<body>
+<div class="puntos" aria-hidden="true"></div>
+<main>
+  <header>
+    <img class="logo" src="recursos/logo.svg" alt="Fogón">
+    <h1>Tuya desde el primer día.</h1>
+    <p class="promesa">Apps para el día a día, completas y gratis de verdad.</p>
+    <div class="sellos" aria-label="Lo que prometemos">
+      <span class="sello">Sin anuncios</span><span class="sello">Sin rastreo</span><span class="sello">Sin suscripciones</span><span class="sello">Código abierto</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-apps">
+    <h2 id="t-apps">Las apps</h2>
+    <div class="apps">
+      <article class="app forzudo" data-repo="el-forzudo">
+        <img src="recursos/forzudo.webp" alt="" width="96" height="96">
+        <h3>El Forzudo</h3>
+        <p>Tu cuaderno de entrenos: rutinas, descanso, récords y rangos de fuerza.</p>
+        <a class="boton" href="https://github.com/fogonapps/el-forzudo/releases/latest">Descargar</a>
+        <span class="version"></span>
+      </article>
+      <article class="app ahorrador" data-repo="la-alcancia">
+        <img src="recursos/ahorrador.webp" alt="" width="96" height="96">
+        <h3>La Alcancía</h3>
+        <p>Gastos, presupuesto, metas y pagos fijos. Anota sola tus compras desde el aviso del banco, sin que nada salga de tu teléfono.</p>
+        <a class="boton" href="https://github.com/fogonapps/la-alcancia/releases/latest">Descargar</a>
+        <span class="version"></span>
+      </article>
+      <article class="app cucha" data-repo="la-cucha">
+        <img src="recursos/cucha.webp" alt="" width="96" height="96">
+        <h3>La Cucha</h3>
+        <p>Calorías, recetas colombianas, menú de la semana y lista de mercado.</p>
+        <a class="boton" href="https://github.com/fogonapps/la-cucha/releases/latest">Descargar</a>
+        <span class="version"></span>
+      </article>
+      <article class="app cajon" data-repo="el-cajon">
+        <img src="recursos/cajon.webp" alt="" width="96" height="96">
+        <h3>El Cajón</h3>
+        <p>Películas, series, animes, libros y música: tu nota, tu diario, tus listas y lo que escuchas.</p>
+        <a class="boton" href="https://github.com/fogonapps/el-cajon/releases/latest">Descargar</a>
+        <span class="version"></span>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-instalar">
+    <h2 id="t-instalar">Cómo instalarla</h2>
+    <div class="pasos">
+      <div class="paso"><p><strong>Descarga</strong> la app desde tu teléfono Android con el botón de arriba.</p></div>
+      <div class="paso"><p><strong>Ábrela</strong> desde las descargas. Si Android lo pide, permite instalar apps desde tu navegador.</p></div>
+      <div class="paso"><p><strong>¿Quieres que se actualice sola?</strong> Instala <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> y agrega el enlace de la app (por ejemplo, <code>github.com/fogonapps/el-cajon</code>).</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-por-que">
+    <h2 id="t-por-que">¿Por qué gratis?</h2>
+    <div class="tarjeta">
+      <p>Porque una app no tendría que cobrarte cada mes, llenarse de anuncios ni vigilar lo que haces. <strong>Todo funciona completo sin pagar nada.</strong></p>
+      <p>Fogón se sostiene con el apoyo voluntario de quien quiera darlo. Nuestra próxima meta: <strong>llegar a Play Store</strong>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><img src="recursos/chispa.svg" alt=""> Hecha en el Fogón · <a href="https://github.com/fogonapps/fogon">Código</a> · <a href="mailto:fogonapps@gmail.com">fogonapps@gmail.com</a></p>
+  </footer>
+</main>
+<script>
+// Enlaza el botón al APK de la última versión; si la consulta falla, queda la página de la versión.
+document.querySelectorAll(".app[data-repo]").forEach(async (app) => {
+  try {
+    const r = await fetch(`https://api.github.com/repos/fogonapps/${app.dataset.repo}/releases/latest`);
+    if (!r.ok) return;
+    const v = await r.json();
+    const apk = (v.assets || []).find((a) => a.name.endsWith(".apk"));
+    if (apk) app.querySelector(".boton").href = apk.browser_download_url;
+    app.querySelector(".version").textContent = `Versión ${String(v.tag_name).replace(/^v/, "")}`;
+  } catch (_) {}
+});
+</script>
+</body>
+</html>
