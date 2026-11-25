@@ -7,16 +7,19 @@
 <meta name="description" content="Política de privacidad de Fogón Publicador, la herramienta con la que Fogón publica sus propios videos.">
 <link rel="icon" href="recursos/chispa.svg" type="image/svg+xml">
 <style>
-@font-face { font-family: "Bricolage"; src: url("recursos/bricolage.woff") format("woff"); font-weight: 200 800; font-display: swap; }
-:root { --papel: #0E0E10; --texto: #EDEDEF; --suave: #A9A9B2; --linea: rgba(255,255,255,.10); --chispa: #E5332A; }
+@font-face { font-family: "Fraunces"; src: url("recursos/fraunces.woff") format("woff"); font-weight: 500 900; font-display: swap; }
+@font-face { font-family: "Figtree"; src: url("recursos/figtree.woff") format("woff"); font-weight: 300 900; font-display: swap; }
+:root { --papel: #F7F7F5; --texto: #111111; --suave: #5F5F5B; --linea: #DEDED9; }
+@media (prefers-color-scheme: dark) { :root { --papel: #121212; --texto: #F2F2EF; --suave: #A3A39E; --linea: #2C2C2A; } }
 * { box-sizing: border-box; margin: 0; }
 html { background: var(--papel); }
-body { font-family: "Bricolage", system-ui, sans-serif; color: var(--texto); line-height: 1.6; background: var(--papel); }
-main { max-width: 720px; margin: 0 auto; padding: 56px 16px 64px; }
-a { color: var(--texto); }
-h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 800; letter-spacing: -.02em; }
-h2 { font-size: 20px; font-weight: 800; margin: 32px 0 8px; }
+body { font-family: "Figtree", system-ui, sans-serif; font-size: 17px; color: var(--texto); line-height: 1.6; background: var(--papel); }
+main { max-width: 720px; margin: 0 auto; padding: 56px 24px 64px; }
+a { color: var(--texto); text-underline-offset: 3px; }
+h1 { font-family: "Fraunces", Georgia, serif; font-size: clamp(30px, 5vw, 42px); font-weight: 700; line-height: 1.15; letter-spacing: -.015em; }
+h2 { font-family: "Fraunces", Georgia, serif; font-size: 22px; font-weight: 700; margin: 32px 0 8px; }
 p, li { color: var(--suave); }
+strong { color: var(--texto); }
 ul { padding-left: 20px; margin-top: 6px; }
 .fecha { margin-top: 6px; font-size: 14px; }
 .en { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--linea); }
@@ -55,7 +58,7 @@ footer { margin-top: 48px; font-size: 14px; color: var(--suave); }
     <p>Fogón Publicador is an internal tool that Fogón uses only to upload its own videos to its own YouTube channel, Facebook page and Instagram account. It does not access other people's accounts or data and collects nothing from viewers. Access tokens are stored only on Fogón's own computer; they are never sold, shared, used for advertising or used to train AI models. Fogón Publicador's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. It uses YouTube API Services; see the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a> and the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. Access can be revoked at any time at myaccount.google.com/permissions. Contact: fogonapps@gmail.com.</p>
   </div>
 
-  <footer><a href="./">Fogón</a></footer>
+  <footer><a href="./">Volver a Fogón</a></footer>
 </main>
 </body>
 </html>
