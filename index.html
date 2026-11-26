@@ -106,6 +106,9 @@ h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 4.4vw, 
 .testers h2 { max-width: 16ch; }
 .testers p { opacity: .78; margin-top: 12px; max-width: 52ch; }
 .testers .boton { background: var(--sobre-tinta); color: var(--tinta); border-color: var(--sobre-tinta); }
+.pasos-tester { margin: 20px 0 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.pasos-tester li { opacity: .92; }
+.testers a:not(.boton) { color: inherit; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
 .testers .cifras { display: flex; gap: 40px; }
 .testers .cifra b { display: block; font-family: var(--serif); font-weight: 900; font-size: 72px; line-height: 1; }
 .testers .cifra span { font-size: 15px; opacity: .78; }
@@ -167,7 +170,6 @@ footer .creditos { margin-top: 20px; max-width: 90ch; font-size: 13px; }
       <a href="#perfil">Tu perfil</a>
       <a href="#todo">Todo lo que hace</a>
       <a href="#testers">Testers</a>
-      <a href="#instalar">Instalar</a>
     </nav>
   </header>
 
@@ -178,10 +180,9 @@ footer .creditos { margin-top: 20px; max-width: 90ch; font-size: 13px; }
         <p class="lema">Lo que ves, lees, escuchas y juegas, en un solo diario.</p>
         <p class="bajada">Películas, series, animes, libros, música y videojuegos, con tu nota y tus fechas. Sin anuncios y sin suscripciones.</p>
         <div class="acciones">
-          <a class="boton" data-repo="el-cajon" href="https://github.com/fogonapps/el-cajon/releases/latest">Descargar para Android</a>
-          <a class="boton borde" href="#testers">Quiero ser tester</a>
+          <a class="boton" href="#testers">Probar Fabs en Google Play</a>
         </div>
-        <p class="nota" id="nota-version"><span class="version" data-version="el-cajon"></span><span class="aviso">Estas pantallas son de Fabs 4.0, que sale muy pronto. Mientras tanto, la versión para descargar todavía se llama El Cajón y tiene el diseño anterior.</span></p>
+        <p class="nota">Fabs está en prueba cerrada en Google Play. Entra como tester y la tienes hoy.</p>
       </div>
       <div class="escena">
         <div class="telefono t1"><img src="recursos/capturas/02-ficha.webp" alt="La ficha de Nosferatu en Fabs: portada grande, estado Visto y cuatro estrellas y media." width="540" height="1200"></div>
@@ -310,10 +311,14 @@ footer .creditos { margin-top: 20px; max-width: 90ch; font-size: 13px; }
 
     <div class="testers" id="testers">
       <div>
-        <h2>Ayúdanos a llevar Fabs a Google Play.</h2>
-        <p>Google pide que una app nueva pase una prueba cerrada: al menos 12 personas que la tengan instalada 14 días seguidos. Solo necesitas un teléfono Android y una cuenta de Google.</p>
-        <p>Unirte al grupo es tu inscripción. Cuando abramos la prueba te llega la invitación, instalas Fabs desde Play y la usas. Si nos cuentas qué te gustó y qué no, mejor. Si quieres, tu nombre va en los créditos.</p>
-        <div class="acciones"><a class="boton" href="https://groups.google.com/g/testers-fogon">Unirme al grupo de testers</a></div>
+        <h2>Instala Fabs como tester.</h2>
+        <p>Google pide que una app nueva pase una prueba cerrada: al menos 12 personas que la tengan instalada 14 días seguidos. Solo necesitas un teléfono Android y la cuenta de Google que usas en Play.</p>
+        <ol class="pasos-tester">
+          <li><a href="https://groups.google.com/g/testers-fogon">Únete al grupo de testers</a> y pulsa «Unirse al grupo».</li>
+          <li><a href="https://play.google.com/apps/testing/io.github.fogonapps.cajon">Activa la prueba</a> con «Convertirse en tester».</li>
+          <li><a href="https://play.google.com/store/apps/details?id=io.github.fogonapps.cajon">Instala Fabs desde Play</a>. Puede tardar unos minutos en aparecer.</li>
+        </ol>
+        <p>Haz los tres pasos con la misma cuenta de Google. Cuéntanos qué te gustó y qué no en el <a href="https://discord.gg/EcWyVd85YN">Discord</a>; si quieres, tu nombre va en los créditos.</p>
       </div>
       <div class="cifras" aria-label="Lo que pide la prueba">
         <div class="cifra"><b>12</b><span>personas como mínimo</span></div>
@@ -321,14 +326,6 @@ footer .creditos { margin-top: 20px; max-width: 90ch; font-size: 13px; }
       </div>
     </div>
 
-    <section id="instalar" aria-labelledby="t-instalar">
-      <h2 id="t-instalar">Cómo instalarla hoy</h2>
-      <ol class="pasos">
-        <li><p><strong>Descarga</strong> la app desde tu teléfono Android con el botón de arriba.</p></li>
-        <li><p><strong>Ábrela</strong> desde tus descargas. Si Android lo pide, permite instalar apps desde tu navegador.</p></li>
-        <li><p><strong>Para que se actualice sola</strong>, instala <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> y agrega <code>github.com/fogonapps/el-cajon</code>.</p></li>
-      </ol>
-    </section>
 
     <section aria-labelledby="t-gratis">
       <div class="gratis">
@@ -380,19 +377,6 @@ document.querySelectorAll("video.clip, .banners video").forEach((v) => {
   new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }, { threshold: .25 }).observe(v);
 });
 
-// El botón apunta al APK de la última versión; desde la 4.0 ya no hace falta el aviso del nombre.
-(async () => {
-  try {
-    const r = await fetch("https://api.github.com/repos/fogonapps/el-cajon/releases/latest");
-    if (!r.ok) return;
-    const v = await r.json();
-    const apk = (v.assets || []).find((a) => a.name.endsWith(".apk"));
-    if (apk) document.querySelectorAll('[data-repo="el-cajon"]').forEach((a) => { a.href = apk.browser_download_url; });
-    const numero = String(v.tag_name).replace(/^v/, "");
-    document.querySelectorAll('[data-version="el-cajon"]').forEach((s) => { s.textContent = `Versión ${numero}`; });
-    if (parseInt(numero, 10) >= 4) document.querySelector("#nota-version .aviso").remove();
-  } catch (_) {}
-})();
 </script>
 </body>
 </html>
