@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fabs · Lo que ves, lees, escuchas y juegas, en un solo diario</title>
-<meta name="description" content="Fabs es tu diario de películas, series, animes, libros, música y videojuegos. Sin anuncios, sin suscripciones y sin vender tus datos. Hecha por Fogón.">
-<meta property="og:title" content="Fabs, de Fogón">
-<meta property="og:description" content="Lo que ves, lees, escuchas y juegas, en un solo diario. Sin anuncios y sin vender tus datos.">
+<title>Fabs · Tu diario de lo que ves, lees, escuchas y juegas</title>
+<meta name="description" content="Fabs es tu diario cultural: películas, series, animes, libros, música y videojuegos, con tu nota y tus fechas. Sin anuncios, sin suscripciones y sin vender tus datos.">
+<meta property="og:title" content="Fabs: tu diario cultural">
+<meta property="og:description" content="Anota con dos toques lo que ves, lees, escuchas y juegas. Sin anuncios.">
 <meta property="og:image" content="https://fogonapps.github.io/recursos/compartir.png">
 <meta name="theme-color" content="#F7F7F5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
@@ -16,74 +16,99 @@
 @font-face { font-family: "Figtree"; src: url("recursos/figtree.woff") format("woff"); font-weight: 300 900; font-display: swap; }
 :root {
   --papel: #F7F7F5; --tinta: #111111; --suave: #5F5F5B; --linea: #DEDED9; --hueco: #EDEDEA;
-  --sobre-tinta: #F7F7F5; --chispa: #E5332A;
+  --sobre-tinta: #F7F7F5; --marco: #161616;
   --serif: "Fraunces", Georgia, serif; --sans: "Figtree", system-ui, sans-serif;
+  --resorte: cubic-bezier(.2, .9, .25, 1.15);
 }
 @media (prefers-color-scheme: dark) {
-  :root { --papel: #121212; --tinta: #F2F2EF; --suave: #A3A39E; --linea: #2C2C2A; --hueco: #1C1C1B; --sobre-tinta: #121212; }
+  :root { --papel: #121212; --tinta: #F2F2EF; --suave: #A3A39E; --linea: #2C2C2A; --hueco: #1E1E1D; --sobre-tinta: #121212; --marco: #2A2A28; }
 }
 * { box-sizing: border-box; margin: 0; }
-html { background: var(--papel); color: var(--tinta); -webkit-text-size-adjust: 100%; }
-body { font-family: var(--sans); font-size: 17px; line-height: 1.55; }
+html { background: var(--papel); color: var(--tinta); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { font-family: var(--sans); font-size: 17px; line-height: 1.55; overflow-x: hidden; }
 a { color: inherit; text-underline-offset: 3px; }
 a:focus-visible, .boton:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+img, video { display: block; max-width: 100%; }
 .envoltura { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 .solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Barra */
 .barra { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
-.barra .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 15px; color: var(--suave); }
-.barra .marca svg, .barra .marca img { height: 26px; width: auto; }
-.barra nav { display: flex; gap: 20px; font-size: 15px; }
+.barra .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; }
+.barra .marca img { width: 30px; height: 30px; border-radius: 8px; }
+.barra .marca small { font-weight: 400; color: var(--suave); font-size: 14px; }
+.barra nav { display: flex; gap: 22px; font-size: 15px; }
 .barra nav a { text-decoration: none; color: var(--suave); }
 .barra nav a:hover { color: var(--tinta); }
 
+/* Teléfono */
+.telefono { position: relative; width: 100%; max-width: 300px; border-radius: 40px; padding: 9px; background: var(--marco);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.45); }
+.telefono img, .telefono video { width: 100%; height: auto; aspect-ratio: 9 / 20; border-radius: 32px; background: #fff; }
+.telefono.corto img, .telefono.corto video { aspect-ratio: 540 / 878; }
+
 /* Portada */
-.portada { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 40px; padding: 48px 0 72px; }
-.portada h1 { color: var(--tinta); line-height: 0; }
-.portada h1 svg { width: min(340px, 70vw); height: auto; display: block; }
-.lema { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 3.2vw, 34px); line-height: 1.2; letter-spacing: -.01em; margin-top: 28px; max-width: 18ch; }
-.acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.portada { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: 40px; padding: 40px 0 72px; }
+.portada h1 { line-height: 0; }
+.portada h1 svg { width: min(360px, 72vw); height: auto; display: block; }
+.lema { font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.18; letter-spacing: -.012em; margin-top: 28px; max-width: 17ch; }
+.bajada { color: var(--suave); margin-top: 14px; max-width: 44ch; }
+.acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .boton {
   display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px;
   border-radius: 999px; font: 600 16px/1 var(--sans); text-decoration: none;
   background: var(--tinta); color: var(--sobre-tinta); border: 1.5px solid var(--tinta);
-  transition: transform .15s ease;
+  transition: transform .2s var(--resorte);
 }
-.boton:active { transform: scale(.97); }
+.boton:hover { transform: translateY(-2px); }
+.boton:active { transform: scale(.96); }
 .boton.borde { background: transparent; color: var(--tinta); }
 .nota { margin-top: 16px; font-size: 14px; color: var(--suave); max-width: 46ch; }
-.tiras { position: relative; }
-.tiras img { width: 100%; height: auto; display: block; border-radius: 28px; background: #1b1b1b; }
+.version { display: block; }
+.escena { position: relative; height: 560px; }
+.escena .telefono { position: absolute; max-width: 260px; }
+.escena .t1 { left: 4%; top: 40px; transform: rotate(-6deg); z-index: 1; }
+.escena .t2 { right: 4%; top: 0; transform: rotate(4deg); z-index: 2; }
 
 /* Promesas */
 .promesas { border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); padding: 22px 0; display: flex; flex-wrap: wrap; gap: 8px 40px; font-weight: 600; }
 
-/* Secciones */
-section { padding: 72px 0 0; }
-h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 4.4vw, 44px); line-height: 1.1; letter-spacing: -.015em; max-width: 20ch; }
-.entrada { color: var(--suave); margin-top: 12px; max-width: 60ch; }
-.funciones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 40px; margin-top: 40px; }
-.funciones h3 { font-family: var(--serif); font-weight: 700; font-size: 22px; line-height: 1.2; }
-.funciones p { color: var(--suave); margin-top: 6px; }
+/* Recorrido */
+section { padding: 96px 0 0; }
+h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.08; letter-spacing: -.015em; max-width: 18ch; }
+.entrada { color: var(--suave); margin-top: 14px; max-width: 46ch; font-size: 18px; }
+.parada { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; padding: 96px 0 0; }
+.parada .telefono { margin: 0 auto; }
+.parada.al-reves .texto { order: 2; }
+.parada ul { list-style: none; padding: 0; margin-top: 20px; border-top: 1px solid var(--linea); }
+.parada li { padding: 12px 0; border-bottom: 1px solid var(--linea); color: var(--suave); }
+.parada li strong { color: var(--tinta); font-weight: 600; }
+.par { display: flex; gap: 20px; justify-content: center; align-items: flex-start; }
+.par .telefono { max-width: 240px; margin: 0; }
+.par .telefono:last-child { margin-top: 56px; }
 
-.testers { background: var(--tinta); color: var(--sobre-tinta); border-radius: 32px; padding: 48px; margin-top: 72px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px 48px; align-items: end; }
+/* Banners */
+.banners { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.banners figure { margin: 0; }
+.banners figure:first-child { grid-column: 1 / -1; }
+.banners video { width: 100%; aspect-ratio: 1360 / 400; object-fit: cover; border-radius: 18px; background: #1b1b1b; }
+.banners figcaption { font-size: 15px; color: var(--suave); margin-top: 8px; }
+.banners figcaption b { color: var(--tinta); font-weight: 600; }
+
+/* Todo lo que hace */
+.funciones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 40px; margin-top: 44px; }
+.funciones h3 { font-family: var(--serif); font-weight: 700; font-size: 21px; line-height: 1.2; }
+.funciones p { color: var(--suave); margin-top: 6px; }
+.fuentes { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--linea); color: var(--suave); font-size: 15px; max-width: 80ch; }
+
+/* Testers */
+.testers { background: var(--tinta); color: var(--sobre-tinta); border-radius: 32px; padding: 48px; margin-top: 96px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px 48px; align-items: end; }
 .testers h2 { max-width: 16ch; }
 .testers p { opacity: .78; margin-top: 12px; max-width: 52ch; }
 .testers .boton { background: var(--sobre-tinta); color: var(--tinta); border-color: var(--sobre-tinta); }
 .testers .cifras { display: flex; gap: 40px; }
-.testers .cifra b { display: block; font-family: var(--serif); font-weight: 900; font-size: 64px; line-height: 1; }
+.testers .cifra b { display: block; font-family: var(--serif); font-weight: 900; font-size: 72px; line-height: 1; }
 .testers .cifra span { font-size: 15px; opacity: .78; }
-
-.apps { list-style: none; padding: 0; margin-top: 28px; border-top: 1px solid var(--linea); }
-.apps li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--linea); }
-.apps img { width: 56px; height: 56px; border-radius: 14px; background: var(--fondo-app); }
-.forzudo { --fondo-app: #2D5BFF; } .alcancia { --fondo-app: #1FB45A; } .cucha { --fondo-app: #FF7A1A; }
-.apps h3 { font-size: 18px; font-weight: 700; }
-.apps p { color: var(--suave); font-size: 15px; }
-.apps .descarga { text-align: right; font-size: 15px; }
-.apps .descarga a { font-weight: 600; }
-.version { display: block; color: var(--suave); font-size: 13px; min-height: 1.3em; }
 
 .pasos { list-style: none; padding: 0; margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 40px; counter-reset: paso; }
 .pasos li { counter-increment: paso; }
@@ -97,42 +122,52 @@ code { font-size: .92em; background: var(--hueco); padding: 1px 6px; border-radi
 .gratis p + p { margin-top: 12px; }
 .gratis strong { color: var(--tinta); }
 
-footer { margin-top: 96px; border-top: 1px solid var(--linea); padding: 32px 0 48px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; font-size: 14px; color: var(--suave); }
+footer { margin-top: 112px; border-top: 1px solid var(--linea); padding: 32px 0 48px; color: var(--suave); font-size: 14px; }
+footer .fila { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; }
 footer .firma { display: flex; align-items: center; gap: 8px; }
 footer .firma img { width: 16px; height: 16px; }
 footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+footer .creditos { margin-top: 20px; max-width: 90ch; font-size: 13px; }
+
+/* Movimiento: los teléfonos de la portada llegan con resorte y cada pantalla entra al llegar a ella. */
+@media (prefers-reduced-motion: no-preference) {
+  .escena .t1 { animation: entra1 1s var(--resorte) both .1s; }
+  .escena .t2 { animation: entra2 1s var(--resorte) both .25s; }
+  @keyframes entra1 { from { opacity: 0; transform: translate(40px, 60px) rotate(0deg) scale(.92); } }
+  @keyframes entra2 { from { opacity: 0; transform: translate(-40px, 80px) rotate(0deg) scale(.92); } }
+  .js .aparece { opacity: 0; transform: translateY(48px) rotate(-1.5deg) scale(.96); transition: opacity .7s ease, transform .9s var(--resorte); }
+  .js .aparece.visto { opacity: 1; transform: none; }
+  .js .par .aparece:last-child { transition-delay: .12s; }
+}
+@media (prefers-reduced-motion: reduce) { .boton { transition: none; } html { scroll-behavior: auto; } }
 
 @media (max-width: 860px) {
-  .portada, .testers, .gratis { grid-template-columns: minmax(0, 1fr); }
-  .portada { padding-top: 24px; gap: 32px; }
+  .portada, .testers, .gratis, .parada { grid-template-columns: minmax(0, 1fr); }
+  .parada.al-reves .texto { order: 0; }
+  .portada { padding-top: 16px; gap: 24px; }
+  .escena { height: 470px; max-width: 420px; width: 100%; margin: 0 auto; }
+  .escena .telefono { max-width: 210px; }
   .funciones, .pasos { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .testers { padding: 32px 24px; border-radius: 24px; }
   .barra nav { display: none; }
+  .parada { gap: 32px; padding-top: 72px; }
+  .parada > .telefono { max-width: 260px; }
+  .par .telefono { max-width: 46%; }
+  .banners { grid-template-columns: minmax(0, 1fr); }
 }
-@media (max-width: 520px) {
-  .apps li { grid-template-columns: 48px minmax(0, 1fr); }
-  .apps img { width: 48px; height: 48px; border-radius: 12px; }
-  .apps .descarga { grid-column: 2; text-align: left; }
-  .acciones .boton { flex: 1 1 100%; }
-}
-
-/* Un solo momento al cargar: las tiras de banners entran */
-@media (prefers-reduced-motion: no-preference) {
-  .tiras img { animation: llega .9s cubic-bezier(.2, .8, .2, 1) both .15s; }
-  @keyframes llega { from { opacity: 0; transform: translateY(24px) rotate(-2deg) scale(.97); } }
-}
-@media (prefers-reduced-motion: reduce) { .boton { transition: none; } }
+@media (max-width: 520px) { .acciones .boton { flex: 1 1 100%; } }
 </style>
 </head>
 <body>
 <div class="envoltura">
   <header class="barra">
-    <a class="marca" href="./"><img src="recursos/fabs-icono.svg" alt="" width="26" height="26"> de Fogón</a>
+    <a class="marca" href="./"><img src="recursos/fabs-icono.svg" alt="" width="30" height="30"> Fabs <small>de Fogón</small></a>
     <nav aria-label="Secciones">
-      <a href="#fabs">Qué hace</a>
+      <a href="#anotar">Cómo funciona</a>
+      <a href="#perfil">Tu perfil</a>
+      <a href="#todo">Todo lo que hace</a>
       <a href="#testers">Testers</a>
-      <a href="#apps">Otras apps</a>
-      <a href="#instalar">Cómo instalar</a>
+      <a href="#instalar">Instalar</a>
     </nav>
   </header>
 
@@ -141,29 +176,136 @@ footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
       <div>
         <h1><span class="solo-lector">Fabs</span><span id="logotipo" aria-hidden="true"></span></h1>
         <p class="lema">Lo que ves, lees, escuchas y juegas, en un solo diario.</p>
+        <p class="bajada">Películas, series, animes, libros, música y videojuegos, con tu nota y tus fechas. Sin anuncios y sin suscripciones.</p>
         <div class="acciones">
           <a class="boton" data-repo="el-cajon" href="https://github.com/fogonapps/el-cajon/releases/latest">Descargar para Android</a>
           <a class="boton borde" href="#testers">Quiero ser tester</a>
         </div>
-        <p class="nota"><span class="version" data-version="el-cajon"></span>Fabs es el nombre nuevo de El Cajón. Mientras llega la próxima versión, la app que descargas todavía se llama El Cajón.</p>
+        <p class="nota" id="nota-version"><span class="version" data-version="el-cajon"></span><span class="aviso">Estas pantallas son de Fabs 4.0, que sale muy pronto. Mientras tanto, la versión para descargar todavía se llama El Cajón y tiene el diseño anterior.</span></p>
       </div>
-      <div class="tiras">
-        <img src="recursos/fabs-banners.webp" alt="Banners del perfil de Fabs: un casete rebobinando, un estante de libros, un paisaje en líneas verdes y un letrero de hotel en neón." width="462" height="470">
+      <div class="escena">
+        <div class="telefono t1"><img src="recursos/capturas/02-ficha.webp" alt="La ficha de Nosferatu en Fabs: portada grande, estado Visto y cuatro estrellas y media." width="540" height="1200"></div>
+        <div class="telefono t2"><img src="recursos/capturas/01-inicio.webp" alt="El inicio de Fabs: las doce obras terminadas en el año y tu diario con Don Quijote, Caruso y Nosferatu." width="540" height="1200"></div>
       </div>
     </div>
 
     <p class="promesas" aria-label="Lo que prometemos"><span>Sin anuncios.</span><span>No vendemos tus datos.</span><span>Sin suscripciones.</span><span>Código abierto.</span></p>
 
-    <section id="fabs" aria-labelledby="t-fabs">
-      <h2 id="t-fabs">Todo lo que te gusta, con tu nota y tus fechas.</h2>
-      <div class="funciones">
-        <div><h3>Todo en un lugar</h3><p>Películas, series, animes, libros, discos y videojuegos, con portada, año, creador y sinopsis. Cambia la portada o sube la tuya.</p></div>
-        <div><h3>Tu nota y tu diario</h3><p>Estrellas de media en media, me gusta y reseña. Cada vez que terminas algo queda en tu diario con su fecha.</p></div>
-        <div><h3>Por ver, en curso, terminado</h3><p>Tus pendientes, lo que llevas a medias y lo que ya acabaste, con listas propias y tus favoritas en el perfil.</p></div>
-        <div><h3>Tus cifras del año</h3><p>Lo que terminaste, horas de cine, páginas leídas, tus géneros y creadores, y un reto del año si quieres.</p></div>
-        <div><h3>Trae lo que tenías</h3><p>Importa desde Letterboxd, Goodreads, The StoryGraph, Trakt, TV Time y Netflix, sin repetir lo que ya tienes.</p></div>
-        <div><h3>Gente, si quieres</h3><p>Crea tu @usuario, sigue a otras personas y publica reseñas. Sin cuenta también funciona: todo se guarda en tu teléfono.</p></div>
+    <div class="parada" id="anotar">
+      <div class="texto">
+        <h2>Anota con dos toques.</h2>
+        <p class="entrada">Pon tu nota y un me gusta. Si lo terminaste hoy, queda en tu diario sin pasos de más.</p>
+        <ul>
+          <li><strong>Estrellas de media en media</strong>, me gusta, favorita y reseña.</li>
+          <li><strong>Otra vez:</strong> lo que vuelves a ver o a leer cuenta como una vez nueva.</li>
+          <li><strong>Elegir varias</strong> para anotar una tanda de una sola vez.</li>
+        </ul>
       </div>
+      <div class="telefono aparece"><video class="clip" src="recursos/fabs-registro.mp4" poster="recursos/capturas/03-registro-rapido.webp" muted loop playsinline preload="none" aria-label="Una pulsación larga sobre Don Quijote abre el registro rápido: cinco estrellas, Guardar, y queda anotado en el diario."></video></div>
+    </div>
+
+    <div class="parada al-reves">
+      <div class="texto">
+        <h2>Cada obra, con todo lo que importa.</h2>
+        <p class="entrada">La portada grande sobre su color, el año, el creador, los géneros y la nota del público junto a la tuya.</p>
+        <ul>
+          <li><strong>Por ver, viendo, visto o abandonado:</strong> el estado en una sola fila.</li>
+          <li><strong>Cambia la portada</strong> por otra o sube la tuya.</li>
+          <li><strong>Toca al director, al autor o al artista</strong> y abre su perfil con su obra.</li>
+        </ul>
+      </div>
+      <div class="telefono corto aparece"><video class="clip" src="recursos/fabs-portada.mp4" muted loop playsinline preload="none" aria-label="Al tocar Nosferatu, su portada crece desde la cuadrícula hasta la ficha, y vuelve a su lugar al salir."></video></div>
+    </div>
+
+    <div class="parada">
+      <div class="texto">
+        <h2>Tu diario y tu año, a la vista.</h2>
+        <p class="entrada">Tus portadas mes a mes, con la nota de cada vez. Y las cifras de tu año: lo que terminaste, horas, páginas, canciones, tu género favorito y quién más aparece.</p>
+        <ul>
+          <li><strong>Diario en cuadrícula o en lista</strong>, como prefieras.</li>
+          <li><strong>Tu año en Fabs:</strong> un resumen en láminas para mirarlo y compartirlo como imagen.</li>
+          <li><strong>Retos del año</strong> por tipo de obra.</li>
+        </ul>
+      </div>
+      <div class="par">
+        <div class="telefono aparece"><img src="recursos/capturas/04-diario.webp" alt="El diario de noviembre en cuadrícula, con portadas y estrellas." width="540" height="1200" loading="lazy"></div>
+        <div class="telefono aparece"><img src="recursos/capturas/05-resumen.webp" alt="Tus cifras de 2026: obras terminadas, género favorito Terror y páginas leídas." width="540" height="1200" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="parada al-reves">
+      <div class="texto">
+        <h2>¿Qué vemos esta noche?</h2>
+        <p class="entrada">Con alguien a quien sigues y que te sigue, Fabs junta lo que los dos tienen por ver. Filtra por tiempo, «Te apuntaste» o «Paso», y listo.</p>
+        <ul>
+          <li><strong>Lo que los dos tienen pendiente</strong>, primero.</li>
+          <li><strong>Menos de 2 horas, una tarde</strong> o una temporada corta.</li>
+          <li><strong>Por dónde va cada uno</strong> y lo que terminaron juntos.</li>
+        </ul>
+      </div>
+      <div class="telefono aparece"><img src="recursos/capturas/06-juntos.webp" alt="Tú y Camila: ¿Qué vemos? propone Moby Dick, que los dos tienen por leer." width="540" height="1200" loading="lazy"></div>
+    </div>
+
+    <div class="parada">
+      <div class="texto">
+        <h2>Gente que lee y mira como tú.</h2>
+        <p class="entrada">Reseñas de la comunidad, lo que pasa esta semana en tu red y publicaciones con fotos. Se lee incluso sin cuenta.</p>
+        <ul>
+          <li><strong>Crea tu @usuario</strong> solo si quieres: sin cuenta, Fabs funciona completa.</li>
+          <li><strong>Tú eliges</strong> qué es público, qué es para tus seguidores y qué es solo tuyo.</li>
+          <li><strong>Chat</strong> con las personas que sigues.</li>
+        </ul>
+      </div>
+      <div class="telefono aparece"><img src="recursos/capturas/07-gente.webp" alt="Gente: reseñas de la comunidad sobre Metrópolis y lo que pasa esta semana en tu red." width="540" height="1200" loading="lazy"></div>
+    </div>
+
+    <section id="perfil" aria-labelledby="t-perfil">
+      <div class="parada al-reves" style="padding-top:0">
+        <div class="texto">
+          <h2 id="t-perfil">Un perfil que se parece a ti.</h2>
+          <p class="entrada">Tus favoritas, lo que estás viendo, los artistas que escuchas, tus retos y tus insignias. Y arriba, un banner que dice quién eres.</p>
+          <ul>
+            <li><strong>Escaparates</strong> que ordenas a tu gusto.</li>
+            <li><strong>Insignias</strong> que se ganan con días de verdad, no con clics.</li>
+            <li><strong>Una canción</strong> en tu perfil.</li>
+          </ul>
+        </div>
+        <div class="par">
+          <div class="telefono aparece"><img src="recursos/capturas/08-perfil.webp" alt="El perfil de Lucía con el banner animado Abierto 24 horas y sus favoritas." width="540" height="1200" loading="lazy"></div>
+          <div class="telefono aparece"><video class="clip" src="recursos/fabs-insignia.mp4" poster="recursos/capturas/09-perfil-insignias.webp" muted loop playsinline preload="none" aria-label="Llega una insignia nueva: Reto cumplido."></video></div>
+        </div>
+      </div>
+
+      <div style="padding-top:88px">
+        <h2>Banners que se mueven.</h2>
+        <p class="entrada">Cinco colecciones originales: cine negro, videoclub, biblioteca, vinilo y arcade. Opcionales, para tu perfil.</p>
+        <div class="banners">
+          <figure><video src="recursos/banners/videoclub-abierto.mp4" poster="recursos/banners/videoclub-abierto.webp" muted loop playsinline preload="metadata" aria-label="Banner animado Abierto 24 horas"></video><figcaption><b>Abierto 24 horas.</b> Un letrero de neón que zumba y falla sobre el ladrillo.</figcaption></figure>
+          <figure><video src="recursos/banners/negro-ventilador.mp4" poster="recursos/banners/negro-ventilador.webp" muted loop playsinline preload="metadata" aria-label="Banner animado Ventilador de techo"></video><figcaption><b>Ventilador de techo.</b> La persiana, la sombra que gira y el humo.</figcaption></figure>
+          <figure><video src="recursos/banners/vinilo-giradiscos.mp4" poster="recursos/banners/vinilo-giradiscos.webp" muted loop playsinline preload="metadata" aria-label="Banner animado Giradiscos"></video><figcaption><b>Giradiscos.</b> El plato a 33 rpm con su brazo.</figcaption></figure>
+          <figure><video src="recursos/banners/biblioteca-polvo.mp4" poster="recursos/banners/biblioteca-polvo.webp" muted loop playsinline preload="metadata" aria-label="Banner animado Polvo de luz"></video><figcaption><b>Polvo de luz.</b> Un rayo de sol cruza la sala de lectura.</figcaption></figure>
+          <figure><video src="recursos/banners/arcade-hiperespacio.mp4" poster="recursos/banners/arcade-hiperespacio.webp" muted loop playsinline preload="metadata" aria-label="Banner animado Hiperespacio"></video><figcaption><b>Hiperespacio.</b> El salto en el tubo, con «Inserte moneda».</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="todo" aria-labelledby="t-todo">
+      <h2 id="t-todo">Todo lo que hace Fabs.</h2>
+      <div class="funciones">
+        <div><h3>Todo en un lugar</h3><p>Películas, series, animes, libros, discos, artistas y videojuegos, con portada, año, creador, géneros y sinopsis.</p></div>
+        <div><h3>Busca y agrega</h3><p>Encuentra cualquier obra por su título en español o el original. O agrégala a mano.</p></div>
+        <div><h3>Tu nota</h3><p>Estrellas de media en media, me gusta, reseña, etiquetas y la nota del público al lado de la tuya.</p></div>
+        <div><h3>Pendientes y en curso</h3><p>Por ver, por leer, por escuchar y por jugar; lo que llevas a medias, con la página o el capítulo.</p></div>
+        <div><h3>Listas propias</h3><p>Arma las tuyas y destaca tus cuatro favoritas en el perfil.</p></div>
+        <div><h3>Diario</h3><p>Cada vez que terminas algo, con su fecha y su nota. En cuadrícula o en lista.</p></div>
+        <div><h3>Cifras y retos</h3><p>Lo terminado en el año, horas, páginas, canciones, géneros y creadores, y tus retos.</p></div>
+        <div><h3>Tu año en láminas</h3><p>Lo mejor calificado, tu mes más activo y tu racha, listo para compartir como imagen.</p></div>
+        <div><h3>Trae lo que tenías</h3><p>Importa desde Letterboxd, Goodreads, The StoryGraph, Trakt, TV Time, Netflix y Steam, sin repetir lo que ya tienes.</p></div>
+        <div><h3>Juntos</h3><p>Qué ver con alguien que sigues: lo que los dos tienen por ver y lo que terminaron los dos.</p></div>
+        <div><h3>Red opcional</h3><p>Sigue a otras personas, publica reseñas y fotos, y conversa. Solo se sube lo que marcas.</p></div>
+        <div><h3>Tus datos son tuyos</h3><p>Todo se guarda en tu teléfono. Si quieres, una copia cifrada con tu cuenta de Fogón. Descarga tus datos cuando quieras.</p></div>
+      </div>
+      <p class="fuentes">En español e inglés, con tema claro y oscuro. Internet solo se usa para buscar, traer portadas y, si lo activas, para la red y la copia cifrada.</p>
     </section>
 
     <div class="testers" id="testers">
@@ -179,33 +321,12 @@ footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
       </div>
     </div>
 
-    <section id="apps" aria-labelledby="t-apps">
-      <h2 id="t-apps">También de Fogón</h2>
-      <ul class="apps">
-        <li>
-          <img class="forzudo" src="recursos/forzudo.webp" alt="" width="56" height="56">
-          <div><h3>El Forzudo</h3><p>Tu cuaderno de entrenos: rutinas, descanso, récords y rangos de fuerza.</p></div>
-          <div class="descarga"><a data-repo="el-forzudo" href="https://github.com/fogonapps/el-forzudo/releases/latest">Descargar</a><span class="version" data-version="el-forzudo"></span></div>
-        </li>
-        <li>
-          <img class="alcancia" src="recursos/ahorrador.webp" alt="" width="56" height="56">
-          <div><h3>La Alcancía</h3><p>Gastos, presupuesto, metas y pagos fijos. Anota sola tus compras desde el aviso del banco, sin que nada salga de tu teléfono.</p></div>
-          <div class="descarga"><a data-repo="la-alcancia" href="https://github.com/fogonapps/la-alcancia/releases/latest">Descargar</a><span class="version" data-version="la-alcancia"></span></div>
-        </li>
-        <li>
-          <img class="cucha" src="recursos/cucha.webp" alt="" width="56" height="56">
-          <div><h3>La Cucha</h3><p>Calorías, recetas colombianas, menú de la semana y lista de mercado.</p></div>
-          <div class="descarga"><a data-repo="la-cucha" href="https://github.com/fogonapps/la-cucha/releases/latest">Descargar</a><span class="version" data-version="la-cucha"></span></div>
-        </li>
-      </ul>
-    </section>
-
     <section id="instalar" aria-labelledby="t-instalar">
-      <h2 id="t-instalar">Cómo instalarla</h2>
+      <h2 id="t-instalar">Cómo instalarla hoy</h2>
       <ol class="pasos">
         <li><p><strong>Descarga</strong> la app desde tu teléfono Android con el botón de arriba.</p></li>
         <li><p><strong>Ábrela</strong> desde tus descargas. Si Android lo pide, permite instalar apps desde tu navegador.</p></li>
-        <li><p><strong>Para que se actualice sola</strong>, instala <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> y agrega el enlace de la app, por ejemplo <code>github.com/fogonapps/el-cajon</code>.</p></li>
+        <li><p><strong>Para que se actualice sola</strong>, instala <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> y agrega <code>github.com/fogonapps/el-cajon</code>.</p></li>
       </ol>
     </section>
 
@@ -214,42 +335,64 @@ footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
         <h2 id="t-gratis">¿Por qué es gratis?</h2>
         <div>
           <p>Porque una app no tendría que cobrarte cada mes, llenarse de anuncios ni vigilar lo que haces. <strong>Todo funciona completo sin pagar nada.</strong></p>
-          <p>Fogón se sostiene con las chispas: banners, marcos y fondos opcionales para tu perfil. Ninguna función se paga.</p>
+          <p>Fabs se sostiene con las chispas: banners, marcos y fondos opcionales para tu perfil. Ninguna función se paga.</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p class="firma"><img src="recursos/chispa.svg" alt=""> Hecha en Fogón, un estudio de apps para el día a día.</p>
-    <nav aria-label="Enlaces">
-      <a href="https://github.com/fogonapps/fogon">Código</a>
-      <a href="https://fogonapps.duckdns.org/privacidad">Privacidad</a>
-      <a href="https://fogonapps.duckdns.org/terminos">Términos</a>
-      <a href="privacidad.html">Privacidad de Fogón Publicador</a>
-      <a href="mailto:fogonapps@gmail.com">fogonapps@gmail.com</a>
-    </nav>
+    <div class="fila">
+      <p class="firma"><img src="recursos/chispa.svg" alt=""> Fabs es una app de Fogón.</p>
+      <nav aria-label="Enlaces">
+        <a href="https://github.com/fogonapps/fogon">Código</a>
+        <a href="https://fogonapps.duckdns.org/privacidad">Privacidad</a>
+        <a href="https://fogonapps.duckdns.org/terminos">Términos</a>
+        <a href="privacidad.html">Privacidad de Fogón Publicador</a>
+        <a href="mailto:fogonapps@gmail.com">fogonapps@gmail.com</a>
+      </nav>
+    </div>
+    <p class="creditos">Fabs usa TMDB y su API, pero no está respaldada, certificada ni aprobada por TMDB. Libros de Open Library, música de MusicBrainz y Cover Art Archive, videojuegos de IGDB y Wikidata. Las obras de las capturas son de dominio público.</p>
   </footer>
 </div>
 <script>
+document.documentElement.classList.add("js");
+
 // El logotipo va en línea para que tome el color del tema (claro u oscuro).
 fetch("recursos/fabs-logotipo.svg").then((r) => r.text()).then((svg) => {
   document.getElementById("logotipo").innerHTML = svg;
 }).catch(() => { document.querySelector(".portada h1 .solo-lector").className = ""; });
 
-// Cada botón apunta al APK de la última versión; si la consulta falla, queda la página de la versión.
-const repos = [...new Set([...document.querySelectorAll("[data-repo]")].map((a) => a.dataset.repo))];
-repos.forEach(async (repo) => {
+// Las pantallas entran con resorte cuando llegan a la vista.
+const vistas = document.querySelectorAll(".aparece");
+if ("IntersectionObserver" in window) {
+  const ojo = new IntersectionObserver((entradas) => entradas.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("visto"); ojo.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -12% 0px" });
+  vistas.forEach((v) => ojo.observe(v));
+} else { vistas.forEach((v) => v.classList.add("visto")); }
+
+// Los clips solo corren mientras se ven, y nunca si la persona pidió menos movimiento.
+const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.querySelectorAll("video.clip, .banners video").forEach((v) => {
+  if (quieto) { v.removeAttribute("autoplay"); v.pause(); v.controls = true; return; }
+  if (!("IntersectionObserver" in window)) { v.play().catch(() => {}); return; }
+  new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }, { threshold: .25 }).observe(v);
+});
+
+// El botón apunta al APK de la última versión; desde la 4.0 ya no hace falta el aviso del nombre.
+(async () => {
   try {
-    const r = await fetch(`https://api.github.com/repos/fogonapps/${repo}/releases/latest`);
+    const r = await fetch("https://api.github.com/repos/fogonapps/el-cajon/releases/latest");
     if (!r.ok) return;
     const v = await r.json();
     const apk = (v.assets || []).find((a) => a.name.endsWith(".apk"));
-    if (apk) document.querySelectorAll(`[data-repo="${repo}"]`).forEach((a) => { a.href = apk.browser_download_url; });
+    if (apk) document.querySelectorAll('[data-repo="el-cajon"]').forEach((a) => { a.href = apk.browser_download_url; });
     const numero = String(v.tag_name).replace(/^v/, "");
-    document.querySelectorAll(`[data-version="${repo}"]`).forEach((s) => { s.textContent = `Versión ${numero}`; });
+    document.querySelectorAll('[data-version="el-cajon"]').forEach((s) => { s.textContent = `Versión ${numero}`; });
+    if (parseInt(numero, 10) >= 4) document.querySelector("#nota-version .aviso").remove();
   } catch (_) {}
-});
+})();
 </script>
 </body>
 </html>
